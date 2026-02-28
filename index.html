@@ -1,1 +1,227 @@
-test
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandanee DailyMind</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto Mono', monospace;
+      background-color: #f5f5f5;
+      color: #111;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #222 !important;
+      font-weight: bold;
+    }
+    .navbar-brand {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      padding-left: 40px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      border-bottom: 2px solid #111;
+    }
+
+    h1, h2 {
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      border-left: 5px solid #111;
+      padding-left: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Offcanvas */
+    .offcanvas-title {
+      border-left: 5px solid #111;
+      padding-left: 10px;
+      font-weight: bold;
+    }
+
+    .btn-brutalist {
+      border: 3px solid #111;
+      background: #fff;
+      color: #111;
+      font-weight: bold;
+      box-shadow: 5px 5px 0 #111;
+      transition: all 0.2s;
+    }
+    .btn-brutalist:hover {
+      background: #111;
+      color: #fff;
+      box-shadow: 8px 8px 0 #111;
+    }
+
+    .social-icon {
+      border: 2px solid #111;
+      padding: 12px 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: bold;
+      box-shadow: 3px 3px 0 #111;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      margin-bottom:5px;
+    }
+    .social-icon:hover {
+      background: #111;
+      color: #fff !important;
+      box-shadow: 6px 6px 0 #111;
+      transform: translateY(-2px);
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Bandanee DailyMind</a>
+    <button class="btn btn-brutalist" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+      İletişim
+    </button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container" style="margin-top:100px;">
+
+  <!-- Profesyonel Tanıtım -->
+  <section class="text-center">
+    <h1>Hoş Geldiniz!</h1>
+    <p>Bandanee DailyMind olarak, kişisel gelişim, dijital içerik ve profesyonel öğrenme deneyimlerinizi desteklemek için buradayız.</p>
+    <p>Udemy kursları, PDF paketler, görsel ve video içerikler ile hem bireysel hem kurumsal çözümler sunuyoruz.</p>
+    <p>Amacımız, bilgiye hızlı erişim, öğrenme motivasyonu ve üretkenlik artışı sağlamaktır.</p>
+  </section>
+
+  <section>
+    <h2>Ne Yapıyoruz?</h2>
+    <p>Kişisel gelişim alanında interaktif ve profesyonel kurslar sunuyoruz. Udemy üzerinden eğitimler, PDF ve görsel paketler, video ve ses içerikler ile öğrenme sürecinizi zenginleştiriyoruz.</p>
+    <p>Her içerik hem kişiye özel hem de hazır paket olarak sunulmaktadır. Bu sayede kullanıcılar kendi ihtiyaçlarına göre seçim yapabilir.</p>
+  </section>
+
+  <section>
+    <h2>Bizimle Çalışmanın Avantajları</h2>
+    <p>Profesyonel içerik üretimi, hızlı erişim, yüksek kaliteli dijital materyaller ve kullanıcı dostu çözümler ile sizi ve ekibinizi destekliyoruz.</p>
+    <p>Her adımda öğrenme motivasyonunuzu artıracak, dikkat ve odaklanma sorunlarını minimize edecek yöntemler sunuyoruz.</p>
+  </section>
+
+  <section>
+    <h2>Hedefimiz</h2>
+    <p>Katılımcılarımızın kişisel ve profesyonel gelişimini hızlandırmak, dijital içerik üretim süreçlerini kolaylaştırmak ve eğitim deneyimlerini daha interaktif hale getirmektir.</p>
+    <p>Profesyonel bir şekilde sunulan içeriklerle, hem bireyler hem kurumlar için sürdürülebilir öğrenme çözümleri sağlıyoruz.</p>
+  </section>
+
+</main>
+
+<!-- Offcanvas Contact Panel (Sağ) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">İletişim ve Platformlar</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <p><strong>İsim:</strong> Okan Kaplan</p>
+
+    <!-- WhatsApp Contact Form -->
+    <form id="contactForm">
+      <div class="mb-3">
+        <label for="nameInput" class="form-label">İsim</label>
+        <input type="text" class="form-control" id="nameInput" placeholder="Adınızı girin" required>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput" class="form-label">Mesaj</label>
+        <textarea class="form-control" id="messageInput" rows="3" placeholder="Mesajınızı yazın" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-brutalist w-100">WhatsApp ile Gönder</button>
+    </form>
+
+    <hr>
+
+    <!-- Sosyal ve Platform Linkleri -->
+    <h6>Platformlar</h6>
+    <div class="d-flex flex-column">
+      <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="social-icon text-danger"><i class="fab fa-youtube fa-lg"></i> YouTube</a>
+      <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="social-icon text-dark"><i class="fas fa-graduation-cap fa-lg"></i> Udemy</a>
+      <a href="https://shopier.com/banddes" target="_blank" class="social-icon text-success"><i class="fas fa-store fa-lg"></i> Shopier</a>
+      <a href="https://linkedin.com/in/canvasor" target="_blank" class="social-icon text-primary"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
+      <a href="https://kisisel-gelisim-video-pdfders-imgpack.blogspot.com" target="_blank" class="social-icon text-warning"><i class="fab fa-blogger fa-lg"></i> Blogger</a>
+      <a href="https://www.etsy.com/shop/bandanee" target="_blank" class="social-icon text-info"><i class="fab fa-etsy fa-lg"></i> Etsy</a>
+      <a href="https://dev.to/okan_kaplan_livehtml" target="_blank" class="social-icon text-dark"><i class="fab fa-dev fa-lg"></i> Dev.to</a>
+      <a href="https://sketchfab.com/canvasor" target="_blank" class="social-icon text-secondary"><i class="fas fa-cube fa-lg"></i> Sketchfab</a>
+      <a href="https://codepen.io/livehtml" target="_blank" class="social-icon text-black"><i class="fab fa-codepen fa-lg"></i> CodePen</a>
+      <a href="https://www.tiktok.com/@canvasornet" target="_blank" class="social-icon text-danger"><i class="fab fa-tiktok fa-lg"></i> TikTok</a>
+      <a href="https://vimeo.com/canvasor" target="_blank" class="social-icon text-primary"><i class="fab fa-vimeo fa-lg"></i> Vimeo</a>
+      <a href="https://www.patreon.com/c/livehtml" target="_blank" class="social-icon text-warning"><i class="fab fa-patreon fa-lg"></i> Patreon</a>
+      <a href="https://medium.com/@livehtml" target="_blank" class="social-icon text-dark"><i class="fab fa-medium fa-lg"></i> Medium</a>
+      <a href="https://wordpress.com/" target="_blank" class="social-icon text-info"><i class="fab fa-wordpress fa-lg"></i> WordPress</a>
+      <a href="https://hashnode.com/@bandanee" target="_blank" class="social-icon text-primary"><i class="fas fa-hashtag fa-lg"></i> Hashnode</a>
+      <a href="https://creativemarket.com/users/okankaplan1" target="_blank" class="social-icon text-success"><i class="fas fa-palette fa-lg"></i> CreativeMarket</a>
+      <a href="https://gitlab.com/bandanee/" target="_blank" class="social-icon text-danger"><i class="fab fa-gitlab fa-lg"></i> GitLab</a>
+      <a href="https://www.behance.net/okankaplan1" target="_blank" class="social-icon text-primary"><i class="fab fa-behance fa-lg"></i> Behance</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center p-4" style="background:#222; color:#fff">
+  <p>&copy; 2026 Bandanee DailyMind | Tüm Hakları Saklıdır</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- WhatsApp Form Script -->
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('nameInput').value.trim();
+  const message = document.getElementById('messageInput').value.trim();
+
+  if(name === '' || message === '') {
+    alert('Lütfen tüm alanları doldurun!');
+    return;
+  }
+
+  const phone = '905362279390'; // WhatsApp numaranız
+  const text = encodeURIComponent(`İsim: ${name}\nMesaj: ${message}`);
+  const url = `https://wa.me/${phone}?text=${text}`;
+  window.open(url, '_blank');
+});
+</script>
+
+</body>
+</html>
