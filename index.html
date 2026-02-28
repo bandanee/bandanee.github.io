@@ -3,227 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bandanee</title>
+  <title>Bandanee | Dijital İçerik & Kişisel Gelişim</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@400;700;900&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-color: #F0F0F0;
+      --accent-yellow: #FFDE03;
+      --accent-blue: #3D5AFE;
+      --accent-pink: #FF4081;
+      --dark-color: #000000;
+      --border-thick: 4px solid #000;
+      --brutalist-shadow: 8px 8px 0px #000;
+      --brutalist-shadow-sm: 4px 4px 0px #000;
+    }
+
     body {
-      font-family: 'Roboto Mono', monospace;
-      background-color: #f5f5f5;
-      color: #111;
+      font-family: 'Public Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--dark-color);
+      overflow-x: hidden;
     }
 
+    h1, h2, h3, .navbar-brand {
+      font-family: 'Lexend Mega', sans-serif;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    /* Navbar İyileştirme */
     .navbar {
-      background-color: #222 !important;
-      font-weight: bold;
+      background: #FFF;
+      border-bottom: var(--border-thick);
+      padding: 1rem 0;
     }
+
     .navbar-brand {
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-      padding-left: 40px;
+      font-size: 1.8rem;
+      color: var(--dark-color) !important;
+      padding-left: 15px;
     }
 
+    /* Kartlar ve Bölümler */
     section {
-      padding: 80px 20px;
-      border-bottom: 2px solid #111;
+      padding: 100px 0;
     }
 
-    h1, h2 {
-      font-weight: 700;
+    .brutalist-card {
+      background: #FFF;
+      border: var(--border-thick);
+      box-shadow: var(--brutalist-shadow);
+      padding: 30px;
+      height: 100%;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: 3rem;
+    .brutalist-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px #000;
     }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      border-left: 5px solid #111;
-      padding-left: 10px;
-    }
+    .bg-yellow { background-color: var(--accent-yellow); }
+    .bg-blue { background-color: var(--accent-blue); color: white; }
+    .bg-pink { background-color: var(--accent-pink); color: white; }
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-    .offcanvas-title {
-      border-left: 5px solid #111;
-      padding-left: 10px;
-      font-weight: bold;
-    }
-
-    .btn-brutalist {
-      border: 3px solid #111;
-      background: #fff;
-      color: #111;
-      font-weight: bold;
-      box-shadow: 5px 5px 0 #111;
-      transition: all 0.2s;
-    }
-    .btn-brutalist:hover {
-      background: #111;
-      color: #fff;
-      box-shadow: 8px 8px 0 #111;
-    }
-
-    .social-icon {
-      border: 2px solid #111;
-      padding: 12px 15px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-weight: bold;
-      box-shadow: 3px 3px 0 #111;
-      transition: all 0.2s;
+    /* Butonlar */
+    .btn-brutal {
+      font-family: 'Lexend Mega', sans-serif;
+      background: var(--accent-yellow);
+      border: var(--border-thick);
+      box-shadow: var(--brutalist-shadow-sm);
+      color: #000;
+      padding: 12px 25px;
+      font-size: 0.9rem;
+      transition: all 0.1s;
       text-decoration: none;
-      color: inherit;
-      margin-bottom:5px;
+      display: inline-block;
     }
-    .social-icon:hover {
-      background: #111;
-      color: #fff !important;
-      box-shadow: 6px 6px 0 #111;
-      transform: translateY(-2px);
+
+    .btn-brutal:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px #000;
+      background: var(--dark-color);
+      color: #FFF;
+    }
+
+    /* Sosyal İkonlar Listesi */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .social-link {
+      border: 2px solid #000;
+      background: #fff;
+      padding: 10px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 3px 3px 0px #000;
+    }
+
+    .social-link:hover {
+      background: var(--accent-yellow);
+      color: #000;
+    }
+
+    /* Animasyonlu Badge */
+    .badge-custom {
+      background: var(--dark-color);
+      color: white;
+      padding: 5px 15px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 50px 0;
+      border-top: 10px solid var(--accent-yellow);
+    }
+
+    input, select, textarea {
+      border: 3px solid #000 !important;
+      border-radius: 0 !important;
+      padding: 12px !important;
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Bandanee</a>
-    <button class="btn btn-brutalist" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-      İletişim
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">BANDANEE</a>
+    <button class="btn-brutal" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+      İLETİŞİME GEÇ
     </button>
   </div>
 </nav>
 
-<main class="container" style="margin-top:100px;">
+<main>
 
-  <!-- Hoşgeldiniz -->
-  <section class="text-center">
-    <h1>Bandanee ile Dijital İçerik ve Kişisel Gelişim</h1>
-    <p>Udemy kursları, PDF paketler, görsel ve video içerikler ile kendinizi geliştirin ve dijital içerik dünyasında öne çıkın.</p>
-    <p>Amacımız, kullanıcılarımıza hem hazır hem de kişiye özel çözümler sunarak öğrenme ve üretkenlik deneyimlerini artırmaktır.</p>
+  <section class="container" style="margin-top:80px;">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <span class="badge-custom">ÖĞREN / ÜRET / GELİŞ</span>
+        <h1 class="display-3 mb-4">Dijital İçerik Dünyasında <span style="background: var(--accent-yellow);">Fark Yaratın.</span></h1>
+        <p class="lead fw-bold">Udemy eğitimleri, premium PDF paketleri ve profesyonel görsel içeriklerle öğrenme sürecinizi modernize ediyoruz.</p>
+        <div class="mt-4">
+            <a href="#hizmetler" class="btn-brutal me-3">HİZMETLERİ İNCELE</a>
+            <a href="https://shopier.com/banddes" target="_blank" class="btn-brutal bg-pink">MAĞAZAYA GİT</a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="brutalist-card bg-blue text-center">
+          <i class="fas fa-rocket fa-8x py-5"></i>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Ne Yapıyoruz -->
-  <section>
-    <h2>Ne Yapıyoruz?</h2>
-    <p>Bandanee, kişisel gelişim ve dijital içerik alanında profesyonel çözümler sunar. Her içerik, kullanıcı deneyimini zenginleştirmek için özenle hazırlanır.</p>
-    <ul>
-      <li><strong>YouTube:</strong> Eğitim videoları, PDF ve görsel içeriklerle öğrenmeyi destekliyoruz. <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank">YouTube Kanalı</a></li>
-      <li><strong>Udemy:</strong> Kişisel gelişim kursları ile hem bireysel hem kurumsal eğitim çözümleri sunuyoruz. <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank">Udemy Profili</a></li>
-      <li><strong>Shopier:</strong> PDF, bundle ve görsel paketler ile dijital içerik alışverişinizi kolaylaştırıyoruz. <a href="https://shopier.com/banddes" target="_blank">Shopier Mağazası</a></li>
-    </ul>
+  <section id="hizmetler" class="bg-white" style="border-top: var(--border-thick); border-bottom: var(--border-thick);">
+    <div class="container">
+      <h2 class="mb-5 text-center">NE YAPIYORUZ?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="brutalist-card">
+            <i class="fas fa-graduation-cap fa-3x mb-3"></i>
+            <h3>UDEMY</h3>
+            <p>Sektörel beceriler kazandıran, akıcı ve eksiksiz video eğitim serileri.</p>
+            <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="btn-brutal">KURSLARA BAK</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="brutalist-card bg-yellow">
+            <i class="fab fa-youtube fa-3x mb-3"></i>
+            <h3>YOUTUBE</h3>
+            <p>Ücretsiz rehberler, hap bilgiler ve görsel destekli zengin içerik kanalı.</p>
+            <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="btn-brutal bg-white">ABONE OL</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="brutalist-card">
+            <i class="fas fa-shopping-bag fa-3x mb-3"></i>
+            <h3>SHOPIER</h3>
+            <p>Hemen kullanabileceğiniz PDF bundle paketleri ve dijital tasarım varlıkları.</p>
+            <a href="https://shopier.com/banddes" target="_blank" class="btn-brutal">DOSYALARI İNDİR</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Avantajlarımız -->
-  <section>
-    <h2>Avantajlarımız</h2>
-    <p>Profesyonel içerik, kolay erişim, yüksek kalite ve kullanıcı dostu çözümler sunuyoruz. Her adımda öğrenme motivasyonunuzu artıracak ve dikkat sorunlarını azaltacak yöntemler kullanıyoruz.</p>
-  </section>
-
-  <!-- Hedefimiz -->
-  <section>
-    <h2>Hedefimiz</h2>
-    <p>Katılımcıların kişisel ve profesyonel gelişimini hızlandırmak, dijital içerik üretim süreçlerini kolaylaştırmak ve eğitim deneyimlerini interaktif hale getirmek.</p>
+  <section class="container">
+    <div class="row g-5">
+      <div class="col-md-6">
+        <div class="p-4" style="border-left: 10px solid var(--accent-blue);">
+          <h2>AVANTAJLARIMIZ</h2>
+          <p class="fs-5">İçeriklerimizi hazırlarken sadece bilgi vermiyor, aynı zamanda <strong>odaklanma süresini artıran</strong> ve <strong>dikkat dağınıklığını minimize eden</strong> modern metodolojiler kullanıyoruz.</p>
+          <ul class="list-unstyled mt-4">
+            <li class="mb-2"><i class="fas fa-check-square me-2"></i> %100 Uygulama Odaklı</li>
+            <li class="mb-2"><i class="fas fa-check-square me-2"></i> Ömür Boyu Erişim</li>
+            <li class="mb-2"><i class="fas fa-check-square me-2"></i> Sürekli Güncellenen İçerik</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="brutalist-card bg-pink">
+          <h2 class="text-white">HEDEFİMİZ</h2>
+          <p class="text-white fs-5">Dijital dönüşüm çağında, bireylerin kendi potansiyellerini keşfetmelerini sağlamak ve karmaşık eğitim süreçlerini "interaktif ve eğlenceli" hale getirmek temel vizyonumuzdur.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
 </main>
 
-<!-- Offcanvas -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">İletişim ve Platformlar</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" style="border-left: var(--border-thick); width: 400px;">
+  <div class="offcanvas-header bg-yellow" style="border-bottom: var(--border-thick);">
+    <h5 class="offcanvas-title">BAĞLANTI KUR</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-
-    <p><strong>İletişim Formu</strong></p>
-
-    <!-- WhatsApp Form -->
     <form id="contactForm">
       <div class="mb-3">
-        <label for="reasonSelect" class="form-label">Mesaj Sebebi</label>
+        <label class="fw-bold mb-1">Konu Nedir?</label>
         <select class="form-select" id="reasonSelect" required>
-          <option value="">Seçiniz</option>
-          <option value="Kurs Sorusu">Kurs Sorusu</option>
-          <option value="Dijital İçerik Siparişi">Dijital İçerik Siparişi</option>
-          <option value="Genel Mesaj">Genel Mesaj</option>
+          <option value="Kurs Sorusu">Kurs Hakkında</option>
+          <option value="Dijital İçerik Siparişi">İçerik Siparişi</option>
+          <option value="İş Birliği">İş Birliği</option>
         </select>
       </div>
       <div class="mb-3">
-        <label for="nameInput" class="form-label">İsim</label>
-        <input type="text" class="form-control" id="nameInput" placeholder="Adınızı girin" required>
+        <label class="fw-bold mb-1">Adınız</label>
+        <input type="text" class="form-control" id="nameInput" placeholder="Örn: Ahmet Yılmaz" required>
       </div>
-      <div class="mb-3">
-        <label for="messageInput" class="form-label">Mesaj</label>
-        <textarea class="form-control" id="messageInput" rows="3" placeholder="Mesajınızı yazın" required></textarea>
+      <div class="mb-4">
+        <label class="fw-bold mb-1">Mesajınız</label>
+        <textarea class="form-control" id="messageInput" rows="4" placeholder="Size nasıl yardımcı olabiliriz?" required></textarea>
       </div>
-      <button type="submit" class="btn btn-brutalist w-100">WhatsApp ile Gönder</button>
+      <button type="submit" class="btn-brutal w-100 mb-4">WHATSAPP İLE İLET</button>
     </form>
 
-    <hr>
-
-    <h6>Platformlar</h6>
-    <div class="d-flex flex-column">
-      <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="social-icon text-danger"><i class="fab fa-youtube fa-lg"></i> YouTube</a>
-      <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="social-icon text-dark"><i class="fas fa-graduation-cap fa-lg"></i> Udemy</a>
-      <a href="https://shopier.com/banddes" target="_blank" class="social-icon text-success"><i class="fas fa-store fa-lg"></i> Shopier</a>
-      <a href="https://linkedin.com/in/canvasor" target="_blank" class="social-icon text-primary"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
-      <a href="https://kisisel-gelisim-video-pdfders-imgpack.blogspot.com" target="_blank" class="social-icon text-warning"><i class="fab fa-blogger fa-lg"></i> Blogger</a>
-      <a href="https://www.etsy.com/shop/bandanee" target="_blank" class="social-icon text-info"><i class="fab fa-etsy fa-lg"></i> Etsy</a>
-      <a href="https://dev.to/okan_kaplan_livehtml" target="_blank" class="social-icon text-dark"><i class="fab fa-dev fa-lg"></i> Dev.to</a>
-      <a href="https://sketchfab.com/canvasor" target="_blank" class="social-icon text-secondary"><i class="fas fa-cube fa-lg"></i> Sketchfab</a>
-      <a href="https://codepen.io/livehtml" target="_blank" class="social-icon text-black"><i class="fab fa-codepen fa-lg"></i> CodePen</a>
-      <a href="https://www.tiktok.com/@canvasornet" target="_blank" class="social-icon text-danger"><i class="fab fa-tiktok fa-lg"></i> TikTok</a>
-      <a href="https://vimeo.com/canvasor" target="_blank" class="social-icon text-primary"><i class="fab fa-vimeo fa-lg"></i> Vimeo</a>
-      <a href="https://www.patreon.com/c/livehtml" target="_blank" class="social-icon text-warning"><i class="fab fa-patreon fa-lg"></i> Patreon</a>
-      <a href="https://medium.com/@livehtml" target="_blank" class="social-icon text-dark"><i class="fab fa-medium fa-lg"></i> Medium</a>
-      <a href="https://wordpress.com/" target="_blank" class="social-icon text-info"><i class="fab fa-wordpress fa-lg"></i> WordPress</a>
-      <a href="https://hashnode.com/@bandanee" target="_blank" class="social-icon text-primary"><i class="fas fa-hashtag fa-lg"></i> Hashnode</a>
-      <a href="https://creativemarket.com/users/okankaplan1" target="_blank" class="social-icon text-success"><i class="fas fa-palette fa-lg"></i> CreativeMarket</a>
-      <a href="https://gitlab.com/bandanee/" target="_blank" class="social-icon text-danger"><i class="fab fa-gitlab fa-lg"></i> GitLab</a>
-      <a href="https://www.behance.net/okankaplan1" target="_blank" class="social-icon text-primary"><i class="fab fa-behance fa-lg"></i> Behance</a>
-    </div>
+    <h6 class="fw-black mb-3 text-uppercase">Tüm Platformlarımız</h6>
+    <div class="social-grid">
+      <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
+      <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="social-link"><i class="fas fa-graduation-cap"></i> Udemy</a>
+      <a href="https://shopier.com/banddes" target="_blank" class="social-link"><i class="fas fa-store"></i> Shopier</a>
+      <a href="https://linkedin.com/in/canvasor" target="_blank" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://www.behance.net/okankaplan1" target="_blank" class="social-link"><i class="fab fa-behance"></i> Behance</a>
+      <a href="https://gitlab.com/bandanee/" target="_blank" class="social-link"><i class="fab fa-gitlab"></i> GitLab</a>
+      </div>
   </div>
 </div>
 
-<footer class="text-center p-4" style="background:#222; color:#fff">
-  <p>&copy; 2026 Bandanee | Tüm Hakları Saklıdır</p>
+<footer>
+  <div class="container text-center">
+    <h2 class="mb-4">BANDANEE</h2>
+    <p class="mb-0">© 2026 Bandanee Creative Studio. Her hakkı saklıdır.</p>
+    <small class="opacity-50">Tasarım & Geliştirme: Bandanee Team</small>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-
   const reason = document.getElementById('reasonSelect').value;
   const name = document.getElementById('nameInput').value.trim();
   const message = document.getElementById('messageInput').value.trim();
-
-  if(reason === '' || name === '' || message === '') {
-    alert('Lütfen tüm alanları doldurun!');
-    return;
-  }
-
   const phone = '905362279390';
-  const text = encodeURIComponent(`Sebep: ${reason}\nİsim: ${name}\nMesaj: ${message}`);
-  const url = `https://wa.me/${phone}?text=${text}`;
-  window.open(url, '_blank');
+  const text = encodeURIComponent(`👋 Merhaba! \n📌 Konu: ${reason}\n👤 İsim: ${name}\n💬 Mesaj: ${message}`);
+  window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
 });
 </script>
 
