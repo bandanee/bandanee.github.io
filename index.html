@@ -1,293 +1,1243 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bandanee | Dijital İçerik & Kişisel Gelişim</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BANDANEE — Dijital Çözüm Merkezi</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ─── ROOT ─────────────────────────────────────────────────── */
+:root{
+  --y:#FFE500;
+  --k:#000;
+  --w:#FAFAF8;
+  --r:#FF2D55;
+  --b:#0A0AFF;
+  --g:#00FF94;
+  --border:3px solid #000;
+  --sh:6px 6px 0 #000;
+  --sh-lg:10px 10px 0 #000;
+  --sh-xl:16px 16px 0 #000;
+  --ff-head:'Bebas Neue',sans-serif;
+  --ff-body:'Space Grotesk',sans-serif;
+  --ff-accent:'Syne',sans-serif;
+  --ff-mono:'JetBrains Mono',monospace;
+}
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@400;700;900&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 
-  <style>
-    :root {
-      --bg-color: #F0F0F0;
-      --accent-yellow: #FFDE03;
-      --accent-blue: #3D5AFE;
-      --accent-pink: #FF4081;
-      --dark-color: #000000;
-      --border-thick: 4px solid #000;
-      --brutalist-shadow: 8px 8px 0px #000;
-      --brutalist-shadow-sm: 4px 4px 0px #000;
-    }
+body{
+  font-family:var(--ff-body);
+  background:var(--w);
+  color:var(--k);
+  overflow-x:hidden;
+  cursor:none;
+}
 
-    body {
-      font-family: 'Public Sans', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--dark-color);
-      overflow-x: hidden;
-    }
+/* ─── CUSTOM CURSOR ─────────────────────────────────────────── */
+#cursor{
+  width:20px;height:20px;
+  background:var(--y);
+  border:2px solid var(--k);
+  border-radius:0;
+  position:fixed;top:0;left:0;
+  pointer-events:none;
+  z-index:9999;
+  transition:transform .1s,width .2s,height .2s;
+  mix-blend-mode:multiply;
+}
+#cursor.hovered{width:50px;height:50px;transform:translate(-15px,-15px) rotate(45deg);}
 
-    h1, h2, h3, .navbar-brand {
-      font-family: 'Lexend Mega', sans-serif;
-      text-transform: uppercase;
-      font-weight: 900;
-    }
+/* ─── NOISE OVERLAY ─────────────────────────────────────────── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;opacity:.4;
+}
 
-    /* Navbar İyileştirme */
-    .navbar {
-      background: #FFF;
-      border-bottom: var(--border-thick);
-      padding: 1rem 0;
-    }
+/* ─── NAV ───────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  background:var(--k);
+  border-bottom:4px solid var(--y);
+  z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  height:68px;
+}
+.nav-logo{
+  font-family:var(--ff-head);
+  font-size:2.4rem;
+  color:var(--y);
+  letter-spacing:4px;
+  text-decoration:none;
+}
+.nav-links{display:flex;gap:0;align-items:center;}
+.nav-link{
+  font-family:var(--ff-accent);
+  font-weight:700;
+  font-size:.75rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--w);
+  text-decoration:none;
+  padding:8px 18px;
+  border:2px solid transparent;
+  transition:all .15s;
+}
+.nav-link:hover{background:var(--y);color:var(--k);border-color:var(--y);}
+.nav-cta{
+  font-family:var(--ff-accent);font-weight:800;font-size:.75rem;
+  letter-spacing:2px;text-transform:uppercase;
+  background:var(--y);color:var(--k);
+  border:2px solid var(--y);
+  padding:10px 24px;
+  text-decoration:none;
+  box-shadow:4px 4px 0 var(--r);
+  transition:all .15s;
+}
+.nav-cta:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--r);}
 
-    .navbar-brand {
-      font-size: 1.8rem;
-      color: var(--dark-color) !important;
-      padding-left: 15px;
-    }
+/* ─── MARQUEE ───────────────────────────────────────────────── */
+.marquee-wrap{
+  position:relative;
+  background:var(--y);
+  border-top:3px solid var(--k);
+  border-bottom:3px solid var(--k);
+  overflow:hidden;
+  white-space:nowrap;
+  margin-top:68px;
+  padding:12px 0;
+}
+.marquee-track{
+  display:inline-block;
+  animation:marquee 18s linear infinite;
+}
+.marquee-track span{
+  font-family:var(--ff-head);
+  font-size:1.1rem;
+  letter-spacing:3px;
+  color:var(--k);
+  padding:0 30px;
+}
+.marquee-track .dot{color:var(--r);font-size:1.4rem;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* Kartlar ve Bölümler */
-    section {
-      padding: 100px 0;
-    }
+/* ─── HERO ──────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-bottom:var(--border);
+}
+.hero-left{
+  padding:80px 60px;
+  border-right:var(--border);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-left::before{
+  content:'';
+  position:absolute;top:-100px;left:-100px;
+  width:400px;height:400px;
+  background:var(--y);
+  border-radius:50%;
+  opacity:.12;
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 
-    .brutalist-card {
-      background: #FFF;
-      border: var(--border-thick);
-      box-shadow: var(--brutalist-shadow);
-      padding: 30px;
-      height: 100%;
-      transition: all 0.2s ease;
-      margin-bottom: 20px;
-    }
+.hero-tag{
+  font-family:var(--ff-mono);font-size:.75rem;
+  letter-spacing:3px;text-transform:uppercase;
+  background:var(--k);color:var(--y);
+  padding:6px 14px;display:inline-block;
+  margin-bottom:24px;
+  animation:slideIn .6s ease both;
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
 
-    .brutalist-card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 12px 12px 0px #000;
-    }
+.hero-h1{
+  font-family:var(--ff-head);
+  font-size:clamp(4rem,9vw,8rem);
+  line-height:.95;
+  letter-spacing:-1px;
+  animation:slideUp .7s .1s ease both;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
 
-    .bg-yellow { background-color: var(--accent-yellow); }
-    .bg-blue { background-color: var(--accent-blue); color: white; }
-    .bg-pink { background-color: var(--accent-pink); color: white; }
+.hero-h1 .accent{
+  -webkit-text-stroke:3px var(--k);
+  color:transparent;
+  display:block;
+}
+.hero-h1 .fill{background:var(--y);padding:0 8px;display:inline;}
 
-    /* Butonlar */
-    .btn-brutal {
-      font-family: 'Lexend Mega', sans-serif;
-      background: var(--accent-yellow);
-      border: var(--border-thick);
-      box-shadow: var(--brutalist-shadow-sm);
-      color: #000;
-      padding: 12px 25px;
-      font-size: 0.9rem;
-      transition: all 0.1s;
-      text-decoration: none;
-      display: inline-block;
-    }
+.hero-sub{
+  font-size:1.1rem;font-weight:500;
+  line-height:1.7;margin:28px 0 40px;
+  max-width:480px;
+  color:#333;
+  animation:slideUp .7s .2s ease both;
+}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:slideUp .7s .3s ease both;}
 
-    .btn-brutal:hover {
-      transform: translate(2px, 2px);
-      box-shadow: 0px 0px 0px #000;
-      background: var(--dark-color);
-      color: #FFF;
-    }
+.btn-primary-hero{
+  font-family:var(--ff-accent);font-weight:800;font-size:.85rem;
+  letter-spacing:2px;text-transform:uppercase;
+  background:var(--k);color:var(--y);
+  border:3px solid var(--k);padding:16px 32px;
+  text-decoration:none;
+  box-shadow:var(--sh);
+  transition:all .15s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-primary-hero:hover{transform:translate(-4px,-4px);box-shadow:var(--sh-lg);}
 
-    /* Sosyal İkonlar Listesi */
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-    }
+.btn-outline-hero{
+  font-family:var(--ff-accent);font-weight:800;font-size:.85rem;
+  letter-spacing:2px;text-transform:uppercase;
+  background:transparent;color:var(--k);
+  border:3px solid var(--k);padding:16px 32px;
+  text-decoration:none;
+  box-shadow:var(--sh);
+  transition:all .15s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-outline-hero:hover{background:var(--y);transform:translate(-4px,-4px);box-shadow:var(--sh-lg);}
 
-    .social-link {
-      border: 2px solid #000;
-      background: #fff;
-      padding: 10px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 3px 3px 0px #000;
-    }
+.hero-right{
+  display:grid;
+  grid-template-rows:1fr 1fr;
+}
+.hero-stat-block{
+  padding:50px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-bottom:var(--border);
+  position:relative;overflow:hidden;
+}
+.hero-stat-block:nth-child(1){background:var(--k);}
+.hero-stat-block:nth-child(2){background:var(--y);}
 
-    .social-link:hover {
-      background: var(--accent-yellow);
-      color: #000;
-    }
+.stat-num{
+  font-family:var(--ff-head);
+  font-size:clamp(4rem,8vw,7rem);
+  line-height:1;
+  color:var(--y);
+}
+.hero-stat-block:nth-child(2) .stat-num{color:var(--k);}
+.stat-label{
+  font-family:var(--ff-accent);font-weight:700;
+  font-size:.9rem;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,229,0,.6);margin-top:8px;
+}
+.hero-stat-block:nth-child(2) .stat-label{color:rgba(0,0,0,.5);}
+.stat-desc{
+  font-size:.9rem;color:rgba(255,255,255,.7);margin-top:12px;line-height:1.6;
+}
+.hero-stat-block:nth-child(2) .stat-desc{color:rgba(0,0,0,.6);}
 
-    /* Animasyonlu Badge */
-    .badge-custom {
-      background: var(--dark-color);
-      color: white;
-      padding: 5px 15px;
-      display: inline-block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
+/* ─── SECTION BASE ──────────────────────────────────────────── */
+section{border-bottom:var(--border);}
+.section-label{
+  font-family:var(--ff-mono);font-size:.7rem;letter-spacing:4px;
+  text-transform:uppercase;color:#666;
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.section-label::before{content:'';width:30px;height:2px;background:var(--r);}
 
-    footer {
-      background: #000;
-      color: #fff;
-      padding: 50px 0;
-      border-top: 10px solid var(--accent-yellow);
-    }
+.section-title{
+  font-family:var(--ff-head);
+  font-size:clamp(3rem,7vw,6rem);
+  line-height:1;letter-spacing:-1px;
+  margin-bottom:60px;
+}
 
-    input, select, textarea {
-      border: 3px solid #000 !important;
-      border-radius: 0 !important;
-      padding: 12px !important;
-    }
-  </style>
+/* ─── DAILYMIND SECTION ─────────────────────────────────────── */
+.dailymind-section{
+  display:grid;grid-template-columns:420px 1fr;
+  min-height:600px;
+}
+.dailymind-left{
+  background:var(--b);
+  border-right:var(--border);
+  padding:60px 50px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.dailymind-left::after{
+  content:'DAILY\AMIND';
+  position:absolute;bottom:-40px;left:-20px;
+  font-family:var(--ff-head);font-size:7rem;
+  color:rgba(255,255,255,.05);white-space:pre;line-height:1;
+  pointer-events:none;
+}
+.dm-logo{
+  font-family:var(--ff-head);font-size:3.5rem;
+  color:#fff;line-height:1;
+}
+.dm-logo span{color:var(--g);display:block;}
+.dm-desc{font-size:1rem;color:rgba(255,255,255,.7);line-height:1.7;margin-top:20px;}
+.dm-link{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--ff-accent);font-weight:800;font-size:.85rem;
+  letter-spacing:2px;text-transform:uppercase;
+  background:var(--g);color:var(--k);
+  border:3px solid var(--g);padding:14px 28px;
+  text-decoration:none;box-shadow:var(--sh);
+  transition:all .15s;margin-top:40px;
+}
+.dm-link:hover{transform:translate(-4px,-4px);box-shadow:var(--sh-lg);}
+
+.dailymind-right{padding:60px;}
+.dm-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+}
+.dm-card{
+  border:var(--border);
+  border-collapse:collapse;
+  padding:28px;
+  position:relative;
+  transition:all .2s;
+  background:var(--w);
+  margin:-1px 0 0 -1px;
+}
+.dm-card:hover{
+  background:var(--y);
+  transform:translate(-4px,-4px);
+  box-shadow:var(--sh);
+  z-index:10;
+}
+.dm-icon{font-size:1.8rem;margin-bottom:14px;display:block;}
+.dm-card h4{
+  font-family:var(--ff-accent);font-weight:800;font-size:.85rem;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;
+}
+.dm-card p{font-size:.82rem;line-height:1.6;color:#444;}
+
+/* ─── SERVICES ──────────────────────────────────────────────── */
+.services-section{padding:100px 0;}
+.services-wrap{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border:var(--border);box-shadow:var(--sh-xl);
+}
+.service-card{
+  padding:50px 40px;
+  border-right:var(--border);
+  position:relative;overflow:hidden;
+  transition:all .2s;
+}
+.service-card:last-child{border-right:none;}
+.service-card::before{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;
+  height:0;background:var(--y);
+  transition:height .3s ease;z-index:0;
+}
+.service-card:hover::before{height:100%;}
+.service-card>*{position:relative;z-index:1;}
+.service-num{
+  font-family:var(--ff-head);font-size:5rem;
+  color:rgba(0,0,0,.06);line-height:1;
+  margin-bottom:-20px;
+}
+.service-icon{
+  width:64px;height:64px;
+  background:var(--k);
+  border:3px solid var(--k);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:var(--y);
+  margin-bottom:24px;
+  transition:all .2s;
+}
+.service-card:hover .service-icon{background:var(--k);}
+.service-title{
+  font-family:var(--ff-head);font-size:2rem;
+  letter-spacing:1px;margin-bottom:14px;
+}
+.service-desc{font-size:.9rem;line-height:1.7;color:#444;margin-bottom:28px;}
+.service-card:hover .service-desc{color:#222;}
+.service-btn{
+  font-family:var(--ff-accent);font-weight:700;font-size:.75rem;
+  letter-spacing:2px;text-transform:uppercase;
+  border:2px solid var(--k);padding:10px 20px;
+  text-decoration:none;color:var(--k);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .15s;
+}
+.service-btn:hover{background:var(--k);color:var(--y);}
+
+/* ─── PACKAGES GRID ─────────────────────────────────────────── */
+.packages-section{padding:100px 0;background:#F5F5F0;}
+.pkg-tabs{
+  display:flex;gap:0;margin-bottom:50px;
+  border:var(--border);box-shadow:var(--sh);
+  width:fit-content;
+}
+.pkg-tab{
+  font-family:var(--ff-accent);font-weight:700;font-size:.8rem;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:14px 28px;border:none;
+  background:var(--w);cursor:pointer;
+  border-right:2px solid var(--k);
+  transition:all .15s;
+}
+.pkg-tab:last-child{border-right:none;}
+.pkg-tab.active,.pkg-tab:hover{background:var(--k);color:var(--y);}
+
+.pkg-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border:var(--border);
+}
+.pkg-card{
+  padding:36px 28px;
+  border-right:var(--border);
+  border-bottom:var(--border);
+  background:var(--w);
+  transition:all .2s;
+  cursor:pointer;
+}
+.pkg-card:hover{background:var(--k);color:var(--w);}
+.pkg-card:nth-child(4n){border-right:none;}
+.pkg-card-icon{
+  width:50px;height:50px;
+  border:3px solid var(--k);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:20px;
+  transition:all .2s;
+}
+.pkg-card:hover .pkg-card-icon{border-color:var(--y);background:var(--y);color:var(--k);}
+.pkg-card h4{
+  font-family:var(--ff-accent);font-weight:800;font-size:.9rem;
+  letter-spacing:1px;margin-bottom:8px;
+}
+.pkg-card p{font-size:.8rem;line-height:1.6;color:#555;}
+.pkg-card:hover p{color:#ccc;}
+.pkg-type{
+  font-family:var(--ff-mono);font-size:.65rem;letter-spacing:3px;
+  text-transform:uppercase;
+  display:inline-block;padding:3px 8px;
+  background:var(--y);color:var(--k);
+  border:1px solid var(--k);
+  margin-bottom:12px;
+}
+.pkg-card:hover .pkg-type{background:var(--r);color:#fff;border-color:var(--r);}
+
+/* ─── ADVANTAGES ────────────────────────────────────────────── */
+.adv-section{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.adv-left{
+  padding:100px 80px;
+  border-right:var(--border);
+}
+.adv-list{display:flex;flex-direction:column;gap:0;margin-top:40px;}
+.adv-item{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:28px 0;
+  border-bottom:2px solid #ddd;
+  transition:all .2s;
+}
+.adv-item:hover{padding-left:16px;}
+.adv-item:last-child{border-bottom:none;}
+.adv-no{
+  font-family:var(--ff-head);font-size:2.5rem;
+  color:var(--y);line-height:1;min-width:60px;
+  -webkit-text-stroke:2px var(--k);color:transparent;
+}
+.adv-content h4{
+  font-family:var(--ff-accent);font-weight:800;font-size:1rem;
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.adv-content p{font-size:.88rem;color:#555;line-height:1.6;}
+
+.adv-right{
+  background:var(--k);
+  padding:100px 80px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.adv-right .section-title{color:var(--y);}
+.adv-right p{color:rgba(255,255,255,.7);font-size:1.05rem;line-height:1.8;margin-bottom:24px;}
+.vision-tag{
+  font-family:var(--ff-head);font-size:4rem;
+  color:rgba(255,255,255,.05);
+  line-height:1;margin-bottom:32px;
+}
+
+/* ─── TESTIMONIAL / TICKER ──────────────────────────────────── */
+.ticker-section{
+  background:var(--r);
+  border-top:var(--border);border-bottom:var(--border);
+  overflow:hidden;padding:20px 0;
+}
+.ticker-track{
+  display:inline-block;
+  animation:marquee 22s linear infinite;
+  white-space:nowrap;
+}
+.ticker-track span{
+  font-family:var(--ff-head);font-size:1.4rem;
+  color:#fff;padding:0 40px;letter-spacing:3px;
+}
+.ticker-track .dash{color:var(--y);}
+
+/* ─── CONTACT ───────────────────────────────────────────────── */
+.contact-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:80vh;
+}
+.contact-left{
+  padding:100px 80px;
+  border-right:var(--border);
+}
+.contact-form{display:flex;flex-direction:column;gap:0;}
+.form-row{border:var(--border);border-bottom:none;}
+.form-row:last-of-type{border-bottom:var(--border);}
+.form-row label{
+  display:block;
+  font-family:var(--ff-mono);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;
+  padding:10px 20px 0;color:#888;
+}
+.form-row input,
+.form-row select,
+.form-row textarea{
+  width:100%;border:none;outline:none;
+  font-family:var(--ff-body);font-size:1rem;font-weight:500;
+  padding:8px 20px 16px;background:transparent;
+  resize:none;
+}
+.form-row select{cursor:pointer;}
+.form-submit{
+  margin-top:24px;
+  font-family:var(--ff-head);font-size:1.6rem;letter-spacing:2px;
+  background:var(--k);color:var(--y);
+  border:3px solid var(--k);padding:20px;
+  cursor:pointer;
+  box-shadow:var(--sh);
+  transition:all .15s;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.form-submit:hover{transform:translate(-4px,-4px);box-shadow:var(--sh-lg);}
+.form-submit i{font-size:1.2rem;}
+
+.contact-right{
+  padding:100px 80px;
+  background:#F0F0EB;
+}
+.contact-right h3{
+  font-family:var(--ff-head);font-size:3rem;margin-bottom:40px;line-height:1;
+}
+.social-list{display:flex;flex-direction:column;gap:0;}
+.social-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0;border-bottom:2px solid #ddd;
+  text-decoration:none;color:var(--k);
+  transition:all .15s;
+}
+.social-item:hover{padding-left:12px;}
+.social-item:last-child{border-bottom:none;}
+.social-item-left{display:flex;align-items:center;gap:16px;}
+.social-icon-box{
+  width:44px;height:44px;border:2px solid var(--k);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;background:var(--w);
+  transition:all .15s;
+}
+.social-item:hover .social-icon-box{background:var(--k);color:var(--y);}
+.social-name{font-family:var(--ff-accent);font-weight:700;font-size:.95rem;letter-spacing:1px;}
+.social-handle{font-size:.78rem;color:#777;margin-top:2px;}
+.social-arrow{font-size:.8rem;color:#aaa;}
+
+/* ─── FOOTER ────────────────────────────────────────────────── */
+footer{
+  background:var(--k);
+  padding:80px 0 40px;
+  border-top:6px solid var(--y);
+}
+.footer-top{
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:80px;margin-bottom:60px;
+  border-bottom:2px solid rgba(255,255,255,.1);
+  padding-bottom:60px;
+}
+.footer-brand{
+  font-family:var(--ff-head);font-size:4rem;
+  color:var(--y);line-height:.9;letter-spacing:2px;
+}
+.footer-tagline{
+  font-size:.9rem;color:rgba(255,255,255,.5);
+  margin-top:16px;line-height:1.6;max-width:280px;
+}
+.footer-links-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+}
+.footer-col h5{
+  font-family:var(--ff-mono);font-size:.65rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--y);margin-bottom:20px;
+}
+.footer-col a{
+  display:block;text-decoration:none;
+  color:rgba(255,255,255,.6);font-size:.85rem;
+  padding:5px 0;transition:all .15s;
+}
+.footer-col a:hover{color:var(--y);padding-left:8px;}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.8rem;color:rgba(255,255,255,.3);
+}
+.footer-bottom span{font-family:var(--ff-mono);}
+
+/* ─── CONTAINER ─────────────────────────────────────────────── */
+.container{max-width:1400px;margin:0 auto;padding:0 40px;}
+
+/* ─── ANIMATIONS ────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ─── MOBILE ────────────────────────────────────────────────── */
+@media(max-width:1024px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:60px 30px;}
+  .dailymind-section{grid-template-columns:1fr;}
+  .dailymind-left{border-right:none;border-bottom:var(--border);}
+  .dm-grid{grid-template-columns:repeat(2,1fr);}
+  .services-wrap{grid-template-columns:1fr;}
+  .service-card{border-right:none;border-bottom:var(--border);}
+  .pkg-grid{grid-template-columns:repeat(2,1fr);}
+  .adv-section{grid-template-columns:1fr;}
+  .adv-left,.adv-right{padding:60px 30px;}
+  .contact-section{grid-template-columns:1fr;}
+  .contact-right{border-top:var(--border);}
+  .contact-left,.contact-right{padding:60px 30px;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-links-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">BANDANEE</a>
-    <button class="btn-brutal" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
-      İLETİŞİME GEÇ
-    </button>
+<!-- CURSOR -->
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">BANDANEE</a>
+  <div class="nav-links">
+    <a class="nav-link" href="#dailymind">DailyMind</a>
+    <a class="nav-link" href="#hizmetler">Hizmetler</a>
+    <a class="nav-link" href="#paketler">Paketler</a>
+    <a class="nav-link" href="#iletisim">İletişim</a>
   </div>
+  <a class="nav-cta" href="#iletisim">HEMEN BAŞLA →</a>
 </nav>
 
-<main>
-
-  <section class="container" style="margin-top:80px;">
-    <div class="row align-items-center">
-      <div class="col-lg-7">
-        <span class="badge-custom">ÖĞREN / ÜRET / GELİŞ</span>
-        <h1 class="display-3 mb-4">Dijital İçerik Dünyasında <span style="background: var(--accent-yellow);">Fark Yaratın.</span></h1>
-        <p class="lead fw-bold">Udemy eğitimleri, premium PDF paketleri ve profesyonel görsel içeriklerle öğrenme sürecinizi modernize ediyoruz.</p>
-        <div class="mt-4">
-            <a href="#hizmetler" class="btn-brutal me-3">HİZMETLERİ İNCELE</a>
-            <a href="https://shopier.com/banddes" target="_blank" class="btn-brutal bg-pink">MAĞAZAYA GİT</a>
-        </div>
-      </div>
-      <div class="col-lg-5 d-none d-lg-block">
-        <div class="brutalist-card bg-blue text-center">
-          <i class="fas fa-rocket fa-8x py-5"></i>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="hizmetler" class="bg-white" style="border-top: var(--border-thick); border-bottom: var(--border-thick);">
-    <div class="container">
-      <h2 class="mb-5 text-center">NE YAPIYORUZ?</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="brutalist-card">
-            <i class="fas fa-graduation-cap fa-3x mb-3"></i>
-            <h3>UDEMY</h3>
-            <p>Sektörel beceriler kazandıran, akıcı ve eksiksiz video eğitim serileri.</p>
-            <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="btn-brutal">KURSLARA BAK</a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="brutalist-card bg-yellow">
-            <i class="fab fa-youtube fa-3x mb-3"></i>
-            <h3>YOUTUBE</h3>
-            <p>Ücretsiz rehberler, hap bilgiler ve görsel destekli zengin içerik kanalı.</p>
-            <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="btn-brutal bg-white">ABONE OL</a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="brutalist-card">
-            <i class="fas fa-shopping-bag fa-3x mb-3"></i>
-            <h3>SHOPIER</h3>
-            <p>Hemen kullanabileceğiniz PDF bundle paketleri ve dijital tasarım varlıkları.</p>
-            <a href="https://shopier.com/banddes" target="_blank" class="btn-brutal">DOSYALARI İNDİR</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container">
-    <div class="row g-5">
-      <div class="col-md-6">
-        <div class="p-4" style="border-left: 10px solid var(--accent-blue);">
-          <h2>AVANTAJLARIMIZ</h2>
-          <p class="fs-5">İçeriklerimizi hazırlarken sadece bilgi vermiyor, aynı zamanda <strong>odaklanma süresini artıran</strong> ve <strong>dikkat dağınıklığını minimize eden</strong> modern metodolojiler kullanıyoruz.</p>
-          <ul class="list-unstyled mt-4">
-            <li class="mb-2"><i class="fas fa-check-square me-2"></i> %100 Uygulama Odaklı</li>
-            <li class="mb-2"><i class="fas fa-check-square me-2"></i> Ömür Boyu Erişim</li>
-            <li class="mb-2"><i class="fas fa-check-square me-2"></i> Sürekli Güncellenen İçerik</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="brutalist-card bg-pink">
-          <h2 class="text-white">HEDEFİMİZ</h2>
-          <p class="text-white fs-5">Dijital dönüşüm çağında, bireylerin kendi potansiyellerini keşfetmelerini sağlamak ve karmaşık eğitim süreçlerini "interaktif ve eğlenceli" hale getirmek temel vizyonumuzdur.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" style="border-left: var(--border-thick); width: 400px;">
-  <div class="offcanvas-header bg-yellow" style="border-bottom: var(--border-thick);">
-    <h5 class="offcanvas-title">BAĞLANTI KUR</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-  </div>
-  <div class="offcanvas-body">
-    <form id="contactForm">
-      <div class="mb-3">
-        <label class="fw-bold mb-1">Konu Nedir?</label>
-        <select class="form-select" id="reasonSelect" required>
-          <option value="Kurs Sorusu">Kurs Hakkında</option>
-          <option value="Dijital İçerik Siparişi">İçerik Siparişi</option>
-          <option value="İş Birliği">İş Birliği</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="fw-bold mb-1">Adınız</label>
-        <input type="text" class="form-control" id="nameInput" placeholder="Örn: Ahmet Yılmaz" required>
-      </div>
-      <div class="mb-4">
-        <label class="fw-bold mb-1">Mesajınız</label>
-        <textarea class="form-control" id="messageInput" rows="4" placeholder="Size nasıl yardımcı olabiliriz?" required></textarea>
-      </div>
-      <button type="submit" class="btn-brutal w-100 mb-4">WHATSAPP İLE İLET</button>
-    </form>
-
-    <h6 class="fw-black mb-3 text-uppercase">Tüm Platformlarımız</h6>
-    <div class="social-grid">
-      <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
-      <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="social-link"><i class="fas fa-graduation-cap"></i> Udemy</a>
-      <a href="https://shopier.com/banddes" target="_blank" class="social-link"><i class="fas fa-store"></i> Shopier</a>
-      <a href="https://linkedin.com/in/canvasor" target="_blank" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <a href="https://www.behance.net/okankaplan1" target="_blank" class="social-link"><i class="fab fa-behance"></i> Behance</a>
-      <a href="https://gitlab.com/bandanee/" target="_blank" class="social-link"><i class="fab fa-gitlab"></i> GitLab</a>
-      </div>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>ÖĞREN</span><span class="dot">✦</span>
+    <span>ÜRET</span><span class="dot">✦</span>
+    <span>GELİŞ</span><span class="dot">✦</span>
+    <span>DİJİTAL ÇÖZÜMLER</span><span class="dot">✦</span>
+    <span>KİŞİSEL GELİŞİM</span><span class="dot">✦</span>
+    <span>UDEMY EĞİTİMLERİ</span><span class="dot">✦</span>
+    <span>PDF PAKETLERİ</span><span class="dot">✦</span>
+    <span>3D TASARIM</span><span class="dot">✦</span>
+    <span>MÜZİK & SES</span><span class="dot">✦</span>
+    <span>WEB KODLAMA</span><span class="dot">✦</span>
+    <!-- duplcate -->
+    <span>ÖĞREN</span><span class="dot">✦</span>
+    <span>ÜRET</span><span class="dot">✦</span>
+    <span>GELİŞ</span><span class="dot">✦</span>
+    <span>DİJİTAL ÇÖZÜMLER</span><span class="dot">✦</span>
+    <span>KİŞİSEL GELİŞİM</span><span class="dot">✦</span>
+    <span>UDEMY EĞİTİMLERİ</span><span class="dot">✦</span>
+    <span>PDF PAKETLERİ</span><span class="dot">✦</span>
+    <span>3D TASARIM</span><span class="dot">✦</span>
+    <span>MÜZİK & SES</span><span class="dot">✦</span>
+    <span>WEB KODLAMA</span><span class="dot">✦</span>
   </div>
 </div>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">// Dijital İçerik & Kişisel Gelişim Merkezi</span>
+    <h1 class="hero-h1">
+      <span class="accent">DİJİTAL</span>
+      DÜNYADA
+      <span class="fill">FARK</span>
+      YARAT.
+    </h1>
+    <p class="hero-sub">
+      Bandanee; Udemy eğitimleri, premium PDF paketleri, DailyMind platformu ve profesyonel dijital varlıklarla öğrenme ve üretim sürecinizi dönüştürüyor. Bireyden profesyonele, herkes için çözüm.
+    </p>
+    <div class="hero-btns">
+      <a href="#hizmetler" class="btn-primary-hero">HİZMETLERİ KAT <i class="fas fa-arrow-right"></i></a>
+      <a href="https://bandanee.github.io/DailyMind/" target="_blank" class="btn-outline-hero"><i class="fas fa-brain"></i> DAILYMIND</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-block">
+      <div class="stat-num" data-count="11">0</div>
+      <div class="stat-label">Disipliner Alan</div>
+      <div class="stat-desc">Mindfulness'tan 3D tasarıma, müzikten kodlamaya — kapsamlı dijital içerik ekosistemi.</div>
+    </div>
+    <div class="hero-stat-block">
+      <div class="stat-num" data-count="5" style="color:var(--k)">0</div>
+      <div class="stat-label" style="color:rgba(0,0,0,.5)">İçerik Formatı</div>
+      <div class="stat-desc" style="color:rgba(0,0,0,.6)">PDF, Video, Görsel, Ses ve Uygulama paketleriyle tam öğrenme deneyimi.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DAILYMIND -->
+<section id="dailymind">
+  <div class="dailymind-section">
+    <div class="dailymind-left">
+      <div>
+        <div class="section-label" style="color:rgba(255,255,255,.4)">
+          <span style="background:var(--g);height:2px;width:30px;display:block;"></span>
+          Platform
+        </div>
+        <div class="dm-logo">DAILY<span>MIND</span></div>
+        <p class="dm-desc">
+          Duygusal farkındalık, zihinsel dayanıklılık, nefes & mindfulness ve disiplinler arası gelişim alanlarını tek çatıda sunan kişisel gelişim platformu. Bilim destekli, pratik ve interaktif.
+        </p>
+        <a href="https://bandanee.github.io/DailyMind/" target="_blank" class="dm-link">
+          PLATFORMU ZİYARET ET <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+      <div style="margin-top:40px;">
+        <div style="font-family:var(--ff-mono);font-size:.65rem;letter-spacing:3px;color:rgba(255,255,255,.3);margin-bottom:8px;">PLATFORM URL</div>
+        <div style="font-family:var(--ff-mono);font-size:.8rem;color:var(--g);word-break:break-all;">bandanee.github.io/DailyMind</div>
+      </div>
+    </div>
+    <div class="dailymind-right">
+      <div class="container" style="padding:60px 60px;">
+        <div class="section-label">Kapsam</div>
+        <h2 class="section-title" style="font-size:clamp(2rem,4vw,3.5rem);margin-bottom:40px;">TEMEL GELİŞİM ALANLARI</h2>
+        <div class="dm-grid">
+          <div class="dm-card reveal">
+            <span class="dm-icon">🧠</span>
+            <h4>Duygusal Farkındalık</h4>
+            <p>Duyguları bastırmadan fark etmeyi, bedensel sinyalleri okumayı ve bilinçli seçim yapmayı öğretir.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">🌬️</span>
+            <h4>Nefes & Mindfulness</h4>
+            <p>Günde 1-2 dakikalık çalışmalarla dikkat dağınıklığını azaltır, sinir sistemini düzenler.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">💭</span>
+            <h4>Thought Defusion</h4>
+            <p>Düşüncelerin gerçek değil, zihinsel olaylar olduğunu fark ettirir ve özdeşleşmeden yönetmeyi öğretir.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">🔄</span>
+            <h4>Kognitif Yeniden Çerçeveleme</h4>
+            <p>Olaylara tek açıdan değil, esnek ve işlevsel bakış açılarıyla yaklaşmayı öğretir.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">⚡</span>
+            <h4>Zihinsel Dayanıklılık</h4>
+            <p>Zorlayıcı duygularla kaçmadan kalabilme, toparlanma ve devam edebilme kapasitesi.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">🎯</span>
+            <h4>Değerler & Motivasyon</h4>
+            <p>Bireyin kendi değerleriyle uyumlu hedefler belirlemesini ve içsel motivasyon geliştirmesini sağlar.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">📖</span>
+            <h4>Okuma & Düşünsel Farkındalık</h4>
+            <p>Odaklanma, iç ses gözlemi, anlamlandırma ve eleştirel düşünme becerileri.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">♟️</span>
+            <h4>Satranç & Stratejik Düşünme</h4>
+            <p>Sabır, dürtü kontrolü, karar alma, hata sonrası toparlanma ve öngörü geliştirme.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">🎨</span>
+            <h4>Sanat & Yaratıcı Algı</h4>
+            <p>Anda kalma, duyusal farkındalık, estetik dikkat ve zihinsel yavaşlama becerileri.</p>
+          </div>
+        </div>
+        <div class="dm-grid" style="margin-top:0;">
+          <div class="dm-card reveal">
+            <span class="dm-icon">💻</span>
+            <h4>Web Kodlama</h4>
+            <p>HTML, CSS, JavaScript ve temel programlama mantığı ile interaktif içerikler üretme.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">🎵</span>
+            <h4>Müzik & Ses Tasarımı</h4>
+            <p>Ritm, tonlama, dijital müzik üretimi ve ses ile duygu/etki yaratma becerileri.</p>
+          </div>
+          <div class="dm-card reveal">
+            <span class="dm-icon">🖌️</span>
+            <h4>3D Tasarım & Modelleme</h4>
+            <p>3D modelleme, animasyon ve görselleştirme ile yaratıcı problem çözme ve mekânsal düşünme.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section">
+  <div class="ticker-track">
+    <span>UDEMY KURSLARI</span><span class="dash"> — </span>
+    <span>PDF REHBERLERİ</span><span class="dash"> — </span>
+    <span>GÖRSEL PAKETLER</span><span class="dash"> — </span>
+    <span>SES TASARIMI</span><span class="dash"> — </span>
+    <span>3D MODELLEME</span><span class="dash"> — </span>
+    <span>YOUTUBE KANALİ</span><span class="dash"> — </span>
+    <span>SHOPIER MAĞAZA</span><span class="dash"> — </span>
+    <span>DİJİTAL ÇÖZÜMLER</span><span class="dash"> — </span>
+    <span>UDEMY KURSLARI</span><span class="dash"> — </span>
+    <span>PDF REHBERLERİ</span><span class="dash"> — </span>
+    <span>GÖRSEL PAKETLER</span><span class="dash"> — </span>
+    <span>SES TASARIMI</span><span class="dash"> — </span>
+    <span>3D MODELLEME</span><span class="dash"> — </span>
+    <span>YOUTUBE KANALİ</span><span class="dash"> — </span>
+    <span>SHOPIER MAĞAZA</span><span class="dash"> — </span>
+    <span>DİJİTAL ÇÖZÜMLER</span><span class="dash"> — </span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="hizmetler" style="padding:0;background:var(--w);">
+  <div class="container" style="padding-top:100px;padding-bottom:100px;">
+    <div class="section-label reveal">Hizmetler</div>
+    <h2 class="section-title reveal">PLATFORMLARIMIZ</h2>
+    <div class="services-wrap reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="service-title">UDEMY EĞİTİMLERİ</div>
+        <p class="service-desc">Sektörel beceriler kazandıran, akıcı ve eksiksiz video eğitim serileri. Ömür boyu erişim, sertifika ve sürekli güncellenen içerik.</p>
+        <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="service-btn">KURSLARA BAK <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card" style="background:#FFFDE7;">
+        <div class="service-num">02</div>
+        <div class="service-icon" style="background:var(--r);border-color:var(--r);"><i class="fab fa-youtube"></i></div>
+        <div class="service-title">YOUTUBE KANALI</div>
+        <p class="service-desc">Ücretsiz rehberler, hap bilgiler ve görsel destekli zengin içerik kanalı. Kişisel gelişimden dijital tasarıma geniş içerik yelpazesi.</p>
+        <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="service-btn">ABONE OL <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon" style="background:var(--b);border-color:var(--b);"><i class="fas fa-store"></i></div>
+        <div class="service-title">SHOPIER MAĞAZA</div>
+        <p class="service-desc">Hemen kullanabileceğiniz PDF bundle paketleri, görsel içerikler ve dijital tasarım varlıkları. Anında indirme ve tam erişim.</p>
+        <a href="https://shopier.com/banddes" target="_blank" class="service-btn">MAĞAZAYA GİT <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="paketler" class="packages-section">
+  <div class="container">
+    <div class="section-label reveal">İçerikler</div>
+    <h2 class="section-title reveal">DİJİTAL PAKETLER</h2>
+
+    <div style="margin-bottom:0">
+      <!-- PDF Paketleri -->
+      <div style="margin-bottom:0">
+        <div style="font-family:var(--ff-mono);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:#888;padding:16px 0 8px;border-top:var(--border);">📄 PDF PAKETLERİ</div>
+        <div class="pkg-grid">
+          <div class="pkg-card reveal">
+            <div class="pkg-type">PDF</div>
+            <div class="pkg-card-icon"><i class="fas fa-heart"></i></div>
+            <h4>Duygusal Farkındalık PDF</h4>
+            <p>Duyguları fark etme ve bilinçli seçim yapmayı geliştiren rehber.</p>
+          </div>
+          <div class="pkg-card reveal">
+            <div class="pkg-type">PDF</div>
+            <div class="pkg-card-icon"><i class="fas fa-wind"></i></div>
+            <h4>Nefes & Mindfulness PDF</h4>
+            <p>Zihinsel odaklanma ve anda kalmayı destekleyen egzersizler.</p>
+          </div>
+          <div class="pkg-card reveal">
+            <div class="pkg-type">PDF</div>
+            <div class="pkg-card-icon"><i class="fas fa-code"></i></div>
+            <h4>Web Kodlama PDF</h4>
+            <p>HTML, CSS ve JS temel projeleri ve pratik rehberi.</p>
+          </div>
+          <div class="pkg-card reveal">
+            <div class="pkg-type">PDF</div>
+            <div class="pkg-card-icon"><i class="fas fa-music"></i></div>
+            <h4>Müzik & Ses Tasarımı PDF</h4>
+            <p>Ses ve ritm farkındalığı ile zihinsel odaklanmayı geliştiren rehber.</p>
+          </div>
+          <div class="pkg-card reveal" style="border-right:var(--border);grid-column:span 2;">
+            <div class="pkg-type">PDF</div>
+            <div class="pkg-card-icon"><i class="fas fa-cube"></i></div>
+            <h4>3D Tasarım & Modelleme PDF</h4>
+            <p>3D modelleme ve görselleştirme rehberi, mekânsal düşünme ve yaratıcı problem çözme.</p>
+          </div>
+          <div class="pkg-card reveal" style="grid-column:span 2;border-right:none;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Görsel Paketleri -->
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:#888;padding:16px 0 8px;border-top:var(--border);">🖼️ GÖRSEL / MEDYA PAKETLERİ</div>
+        <div class="pkg-grid">
+          <div class="pkg-card reveal">
+            <div class="pkg-type">GÖRSEL</div>
+            <div class="pkg-card-icon"><i class="fas fa-image"></i></div>
+            <h4>Duygusal Farkındalık Görselleri</h4>
+            <p>Motivasyon ve mindfulness temalı görseller.</p>
+          </div>
+          <div class="pkg-card reveal">
+            <div class="pkg-type">GÖRSEL</div>
+            <div class="pkg-card-icon"><i class="fas fa-palette"></i></div>
+            <h4>Sanat & Yaratıcı Algı Görselleri</h4>
+            <p>Estetik farkındalık ve yaratıcılığı geliştiren set.</p>
+          </div>
+          <div class="pkg-card reveal" style="border-right:var(--border);">
+            <div class="pkg-type">GÖRSEL</div>
+            <div class="pkg-card-icon"><i class="fas fa-laptop-code"></i></div>
+            <h4>Web Kodlama Görsel Paketi</h4>
+            <p>Kodlama ve proje örneklerini görselleştiren içerikler.</p>
+          </div>
+          <div class="pkg-card" style="border-right:none;background:#F5F5F0;"></div>
+        </div>
+      </div>
+
+      <!-- Ses ve Uygulama Paketleri -->
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:#888;padding:16px 0 8px;border-top:var(--border);">🎵 SES & UYGULAMA PAKETLERİ</div>
+        <div class="pkg-grid">
+          <div class="pkg-card reveal">
+            <div class="pkg-type">SES</div>
+            <div class="pkg-card-icon"><i class="fas fa-headphones"></i></div>
+            <h4>Müzik & Ses Tasarımı Paketi</h4>
+            <p>Meditasyon, odaklanma ve yaratıcı ses deneyimleri.</p>
+          </div>
+          <div class="pkg-card reveal">
+            <div class="pkg-type">APP</div>
+            <div class="pkg-card-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h4>Duygusal Farkındalık App</h4>
+            <p>Mindfulness ve kişisel farkındalık egzersizlerini interaktif olarak deneyimleme.</p>
+          </div>
+          <div class="pkg-card reveal">
+            <div class="pkg-type">APP</div>
+            <div class="pkg-card-icon"><i class="fas fa-terminal"></i></div>
+            <h4>Web Kodlama App</h4>
+            <p>HTML, CSS ve JS projelerini interaktif olarak oluşturabileceğiniz web uygulaması.</p>
+          </div>
+          <div class="pkg-card reveal" style="border-right:none;">
+            <div class="pkg-type">APP</div>
+            <div class="pkg-card-icon"><i class="fas fa-vr-cardboard"></i></div>
+            <h4>3D Tasarım & Modelleme App</h4>
+            <p>3D tasarım ve modelleme uygulaması ile yaratıcılığı dijital ortamda geliştirme.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:50px;">
+      <a href="https://shopier.com/banddes" target="_blank" class="btn-primary-hero">TÜM PAKETLERİ İNCELE <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="adv-section">
+  <div class="adv-left">
+    <div class="container" style="padding:0;">
+      <div class="section-label reveal">Neden Bandanee?</div>
+      <h2 class="section-title reveal">AVANTAJLARIMIZ</h2>
+      <div class="adv-list">
+        <div class="adv-item reveal">
+          <div class="adv-no">01</div>
+          <div class="adv-content">
+            <h4>%100 Uygulama Odaklı</h4>
+            <p>Teorik değil, gerçek hayata doğrudan uygulanabilir içerikler. Her modül somut çıktı hedefler.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-no">02</div>
+          <div class="adv-content">
+            <h4>Ömür Boyu Erişim</h4>
+            <p>Satın aldığınız içeriklere süresiz erişim. Kendi hızınızda, kendi zamanlamanızda öğrenin.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-no">03</div>
+          <div class="adv-content">
+            <h4>Sürekli Güncellenen İçerik</h4>
+            <p>Teknoloji ve metodoloji değiştikçe içerikler de güncellenir. Hiçbir zaman eskimez.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-no">04</div>
+          <div class="adv-content">
+            <h4>Modern Pedagoji</h4>
+            <p>Odaklanma süresini artıran ve dikkat dağınıklığını minimize eden modern öğretim metodolojileri.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-no">05</div>
+          <div class="adv-content">
+            <h4>Disiplinler Arası Yaklaşım</h4>
+            <p>Tek bir alana değil, birbirini besleyen 11+ disiplinde bütüncül gelişim imkânı.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="adv-right">
+    <div class="vision-tag">VİZYON</div>
+    <div class="section-label" style="color:rgba(255,255,255,.3);">
+      <span style="background:var(--y);height:2px;width:30px;display:block;"></span>
+      Hedefimiz
+    </div>
+    <h2 class="section-title" style="color:var(--y);font-size:clamp(2.5rem,5vw,4.5rem);">DİJİTAL DÖNÜŞÜM ÇAĞINDA İNSANI MERKEZE ALMAK.</h2>
+    <p>Dijital dönüşüm çağında, bireylerin kendi potansiyellerini keşfetmelerini sağlamak ve karmaşık eğitim süreçlerini "interaktif ve eğlenceli" hale getirmek temel vizyonumuzdur.</p>
+    <p>Sadece bilgi vermiyoruz — öğrenmeyi öğretiyoruz, farkındalık geliştiriyoruz ve yaratıcı kapasiteyi açığa çıkarıyoruz.</p>
+    <a href="https://bandanee.github.io/DailyMind/" target="_blank" class="dm-link" style="margin-top:10px;">DailyMind'ı Keşfet <i class="fas fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="iletisim" class="contact-section">
+  <div class="contact-left">
+    <div class="section-label reveal">İletişim</div>
+    <h2 class="section-title reveal" style="font-size:clamp(2.5rem,5vw,5rem);">BAĞLANTI KUR.</h2>
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <label>Konu</label>
+        <select id="reasonSelect" required>
+          <option value="Kurs Sorusu">Kurs Hakkında</option>
+          <option value="Dijital İçerik Siparişi">İçerik Siparişi</option>
+          <option value="İş Birliği">İş Birliği</option>
+          <option value="DailyMind">DailyMind Hakkında</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Adınız</label>
+        <input type="text" id="nameInput" placeholder="Ahmet Yılmaz" required>
+      </div>
+      <div class="form-row" style="border-bottom:var(--border);">
+        <label>Mesajınız</label>
+        <textarea id="messageInput" rows="5" placeholder="Size nasıl yardımcı olabiliriz?" required></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <span>WHATSAPP İLE GÖNDER</span>
+        <i class="fab fa-whatsapp"></i>
+      </button>
+    </form>
+  </div>
+
+  <div class="contact-right">
+    <div class="section-label reveal">Tüm Kanallar</div>
+    <h3 class="reveal">PLATFORMLAR<br>& BAĞLANTI</h3>
+    <div class="social-list">
+      <a href="https://bandanee.github.io/DailyMind/" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#00FF94;border-color:#000;"><i class="fas fa-brain"></i></div>
+          <div>
+            <div class="social-name">DailyMind</div>
+            <div class="social-handle">bandanee.github.io/DailyMind</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+      <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#FF0000;color:#fff;border-color:#FF0000;"><i class="fab fa-youtube"></i></div>
+          <div>
+            <div class="social-name">YouTube Kanalı</div>
+            <div class="social-handle">Kişisel Gelişim Video PDF</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+      <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#A435F0;color:#fff;border-color:#A435F0;"><i class="fas fa-graduation-cap"></i></div>
+          <div>
+            <div class="social-name">Udemy Eğitimler</div>
+            <div class="social-handle">udemy.com/user/okan-kaplan-7</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+      <a href="https://shopier.com/banddes" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#F97316;color:#fff;border-color:#F97316;"><i class="fas fa-store"></i></div>
+          <div>
+            <div class="social-name">Shopier Mağaza</div>
+            <div class="social-handle">shopier.com/banddes</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+      <a href="https://linkedin.com/in/canvasor" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#0A66C2;color:#fff;border-color:#0A66C2;"><i class="fab fa-linkedin"></i></div>
+          <div>
+            <div class="social-name">LinkedIn</div>
+            <div class="social-handle">linkedin.com/in/canvasor</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+      <a href="https://www.behance.net/okankaplan1" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#1769FF;color:#fff;border-color:#1769FF;"><i class="fab fa-behance"></i></div>
+          <div>
+            <div class="social-name">Behance</div>
+            <div class="social-handle">behance.net/okankaplan1</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+      <a href="https://gitlab.com/bandanee/" target="_blank" class="social-item reveal">
+        <div class="social-item-left">
+          <div class="social-icon-box" style="background:#FC6D26;color:#fff;border-color:#FC6D26;"><i class="fab fa-gitlab"></i></div>
+          <div>
+            <div class="social-name">GitLab</div>
+            <div class="social-handle">gitlab.com/bandanee</div>
+          </div>
+        </div>
+        <i class="fas fa-arrow-right social-arrow"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="container text-center">
-    <h2 class="mb-4">BANDANEE</h2>
-    <p class="mb-0">© 2026 Bandanee Creative Studio. Her hakkı saklıdır.</p>
-    <small class="opacity-50">Tasarım & Geliştirme: Bandanee Team</small>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">BAN<br>DA<br>NEE</div>
+        <p class="footer-tagline">Dijital İçerik & Kişisel Gelişim Merkezi. Öğren, üret, geliş — her adımda seninleyiz.</p>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <a href="https://bandanee.github.io/DailyMind/" target="_blank">DailyMind →</a>
+          <a href="https://www.udemy.com/user/okan-kaplan-7" target="_blank">Udemy Kursları</a>
+          <a href="https://shopier.com/banddes" target="_blank">Shopier Mağaza</a>
+          <a href="https://www.youtube.com/@Ki%C5%9FiselGeli%C5%9Fim-Video-Pdf-img" target="_blank">YouTube Kanalı</a>
+        </div>
+        <div class="footer-col">
+          <h5>İçerikler</h5>
+          <a href="#">PDF Paketleri</a>
+          <a href="#">Görsel Paketler</a>
+          <a href="#">Ses Paketleri</a>
+          <a href="#">Uygulama Paketleri</a>
+          <a href="#">3D Tasarım</a>
+        </div>
+        <div class="footer-col">
+          <h5>İletişim</h5>
+          <a href="https://linkedin.com/in/canvasor" target="_blank">LinkedIn</a>
+          <a href="https://www.behance.net/okankaplan1" target="_blank">Behance</a>
+          <a href="https://gitlab.com/bandanee/" target="_blank">GitLab</a>
+          <a href="#iletisim">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Bandanee Creative Studio — Her hakkı saklıdır.</span>
+      <span>Tasarım & Geliştirme: Bandanee Team</span>
+    </div>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// CURSOR
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.dm-card,.pkg-card,.adv-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('hovered'));
+});
+
+// COUNTER ANIMATION
+function animateCount(el, target) {
+  let start = 0;
+  const dur = 1500;
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / dur, 1);
+    el.textContent = Math.floor(progress * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + '+';
+  };
+  requestAnimationFrame(step);
+}
+
+// INTERSECTION OBSERVER
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// COUNT UP
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = parseInt(e.target.dataset.count);
+      animateCount(e.target, target);
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+// FORM
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const reason = document.getElementById('reasonSelect').value;
   const name = document.getElementById('nameInput').value.trim();
   const message = document.getElementById('messageInput').value.trim();
   const phone = '905362279390';
-  const text = encodeURIComponent(`👋 Merhaba! \n📌 Konu: ${reason}\n👤 İsim: ${name}\n💬 Mesaj: ${message}`);
+  const text = encodeURIComponent(`👋 Merhaba!\n📌 Konu: ${reason}\n👤 İsim: ${name}\n💬 Mesaj: ${message}`);
   window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
 });
-</script>
 
+// NAV active on scroll
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) cur = s.id;
+  });
+  document.querySelectorAll('.nav-link').forEach(a => {
+    a.style.background = a.getAttribute('href') === '#' + cur ? 'var(--y)' : '';
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--k)' : '';
+  });
+});
+</script>
 </body>
 </html>
